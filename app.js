@@ -10,6 +10,12 @@ var app = express();
 app.set('views', './views');
 app.set('view engine', 'jade');
 
+// GET the home page
+app.get('/', function (req, res) {
+  makeRequest(searchOnLastfm);
+  res.render('index', { title: 'Top Albums', artist : 'Top albums for ' + artist + ':', albums : topAlbums});
+});
+
 // QUERY is hard-coded for the time being. Eventually will be retrieved from user input
 var QUERY = 'flying+lotus';
 
@@ -21,24 +27,25 @@ var searchOnLastfm = 'http://ws.audioscrobbler.com/2.0/?' +
     'api_key=' + lastfmCreds + '&' +
     'format=json';
 
+var parsedResponse
+    , artist
+    , album
+    , topAlbums;
+
 // Request to the API
-(function makeRequest(searchOnLastfm) {
+function makeRequest(searchOnLastfm) {
   request(searchOnLastfm, function(error, response, body) {
     if(!error && response.statusCode === 200) {
-      var parsedResponse = JSON.parse(body)
-          , artist = parsedResponse['topalbums']['album'][0]['artist']['name']
-          , album = parsedResponse['topalbums']['album']
-          , topAlbums = album[0]['name'] + ', ' +
-              album[1]['name'] + ', ' +
-              album[2]['name'] + ', ' +
-              album[3]['name'] + ', ' +
-              album[4]['name'];
-
-      app.get('/', function (req, res) {
-        res.render('index', { title: 'Top Albums', artist : 'Top albums for ' + artist + ':', albums : topAlbums});
-      });
+      parsedResponse = JSON.parse(body);
+      artist = parsedResponse['topalbums']['album'][0]['artist']['name'];
+      album = parsedResponse['topalbums']['album'];
+      topAlbums = album[0]['name'] + ', ' +
+          album[1]['name'] + ', ' +
+          album[2]['name'] + ', ' +
+          album[3]['name'] + ', ' +
+          album[4]['name'];
     }
   });
-})(searchOnLastfm);
+}
 
 app.listen(3000);
