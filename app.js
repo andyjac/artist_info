@@ -7,7 +7,7 @@ var lastfmCreds = require('./lastfm_credentials');
 // Instantiate the express app
 var app = express();
 
-app.set('views', './');
+app.set('views', './views');
 app.set('view engine', 'jade');
 
 // QUERY is hard-coded for the time being. Eventually will be retrieved from user input
@@ -22,21 +22,23 @@ var searchOnLastfm = 'http://ws.audioscrobbler.com/2.0/?' +
     'format=json';
 
 // Request to the API
-request(searchOnLastfm, function(error, response, body) {
-  if(!error && response.statusCode === 200) {
-    var parsedResponse = JSON.parse(body)
-        , artist = parsedResponse['topalbums']['album'][0]['artist']['name']
-        , album = parsedResponse['topalbums']['album']
-        , topAlbums = album[0]['name'] + ', ' +
-            album[1]['name'] + ', ' +
-            album[2]['name'] + ', ' +
-            album[3]['name'] + ', ' +
-            album[4]['name'];
+(function makeRequest(searchOnLastfm) {
+  request(searchOnLastfm, function(error, response, body) {
+    if(!error && response.statusCode === 200) {
+      var parsedResponse = JSON.parse(body)
+          , artist = parsedResponse['topalbums']['album'][0]['artist']['name']
+          , album = parsedResponse['topalbums']['album']
+          , topAlbums = album[0]['name'] + ', ' +
+              album[1]['name'] + ', ' +
+              album[2]['name'] + ', ' +
+              album[3]['name'] + ', ' +
+              album[4]['name'];
 
-    app.get('/', function (req, res) {
-      res.render('index', { title: 'Top Albums', artist : 'Top albums for ' + artist + ':', albums : topAlbums});
-    });
-  }
-});
+      app.get('/', function (req, res) {
+        res.render('index', { title: 'Top Albums', artist : 'Top albums for ' + artist + ':', albums : topAlbums});
+      });
+    }
+  });
+})(searchOnLastfm);
 
 app.listen(3000);
