@@ -29,21 +29,19 @@ var searchOnLastfm = 'http://ws.audioscrobbler.com/2.0/?' +
 
 var parsedResponse
     , artist
-    , album
-    , topAlbums;
+    , albums
+    , topAlbums = '';
 
 // Request to the API
 function makeRequest(searchOnLastfm) {
   request(searchOnLastfm, function(error, response, body) {
     if(!error && response.statusCode === 200) {
       parsedResponse = JSON.parse(body);
-      artist = parsedResponse['topalbums']['album'][0]['artist']['name'];
-      album = parsedResponse['topalbums']['album'];
-      topAlbums = album[0]['name'] + ', ' +
-          album[1]['name'] + ', ' +
-          album[2]['name'] + ', ' +
-          album[3]['name'] + ', ' +
-          album[4]['name'];
+      artist = parsedResponse.topalbums.album[0].artist.name;
+      albums = parsedResponse.topalbums.album;
+      for (var p in albums) {
+        topAlbums += albums[p].name + ', ';
+      }
     }
   });
 }
