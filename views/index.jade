@@ -1,0 +1,12 @@
+doctype html
+html
+  head
+    title= title
+  body
+    block content
+    h1 Welcome!
+    p Go ahead and search for an artist below
+    input(type='text', name='artist', placeholder='enter an artist...')
+    button search
+    h2.artist= artist
+    h4.albums= albums
