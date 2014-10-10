@@ -12,8 +12,9 @@ app.set('view engine', 'jade');
 
 // GET the home page
 app.get('/', function (req, res) {
-  makeRequest(searchOnLastfm);
-  res.render('index', { title: 'Top Albums', artist : 'Top albums for ' + artist + ':', albums : topAlbums});
+  makeRequest(searchOnLastfm, function (artist, topAlbums) {
+    res.render('index', { title: 'Top Albums', artist : 'Top albums for ' + artist + ':', albums : topAlbums});
+  });
 });
 
 // QUERY is hard-coded for the time being. Eventually will be retrieved from user input
@@ -27,22 +28,25 @@ var searchOnLastfm = 'http://ws.audioscrobbler.com/2.0/?' +
     'api_key=' + lastfmCreds + '&' +
     'format=json';
 
-var parsedResponse
+// Request to the API
+function makeRequest(searchOnLastfm, callBack) {
+  var parsedResponse
     , artist
     , albums
+    , album
     , topAlbums = '';
 
-// Request to the API
-function makeRequest(searchOnLastfm) {
   request(searchOnLastfm, function(error, response, body) {
     if(!error && response.statusCode === 200) {
       parsedResponse = JSON.parse(body);
       artist = parsedResponse.topalbums.album[0].artist.name;
       albums = parsedResponse.topalbums.album;
       for (var p in albums) {
-        topAlbums += albums[p].name + ', ';
+        album = albums[p].name;
+        topAlbums += album + ', ' ;
       }
     }
+    callBack(artist, topAlbums);
   });
 }
 
