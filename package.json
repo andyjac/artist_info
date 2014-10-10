@@ -5,6 +5,7 @@
   "dependencies": {
     "express": "latest",
     "jade": "latest",
-    "request": "latest"
+    "request": "latest",
+    "lodash": ">=2.4.1"
   }
 }
