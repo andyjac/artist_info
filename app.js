@@ -1,5 +1,7 @@
 var express = require('express');
 var request = require('request');
+var lodash = require('lodash');
+var bodyParser = require('body-parser');
 
 // import my lastfm API Key
 var lastfmCreds = require('./lastfm_credentials');
@@ -7,8 +9,16 @@ var lastfmCreds = require('./lastfm_credentials');
 // instantiate the express app
 var app = express();
 
+// set express settings
+app.use(bodyParser.urlencoded({extended: false}));
 app.set('views', './views');
 app.set('view engine', 'jade');
+
+// POST user artist search
+app.post('/search', function(req, res) {
+  var artist = req.body.artist;
+  console.log('post recieved: ' + artist);
+});
 
 // GET the home page
 app.get('/', function(req, res) {
@@ -32,6 +42,7 @@ function makeRequest(urlToSearch, callBack, res) {
     , artist
     , albums
     , album
+    , pic
     , topAlbums = [];
 
   request(urlToSearch, function(error, response, body) {
@@ -42,7 +53,6 @@ function makeRequest(urlToSearch, callBack, res) {
       for (var p in albums) {
         album = albums[p].name;
         topAlbums.push(album);
-
       }
       topAlbums = topAlbums.join(', ');
     }
