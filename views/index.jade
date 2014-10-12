@@ -4,9 +4,15 @@ html
     title= title
   body
     block content
-    h1 Welcome!
-    p Go ahead and search for an artist below
-    input(type='text', name='artist', placeholder='enter an artist...')
-    button search
+    // welcome message
+    h1 Hi there!
+    p Go ahead and search for your favorite artist below:
+
+    // artist search form
+    form(name='artistSearch', action='/search', method='post')
+      input(type='text' name='artist', placeholder='enter an artist...')
+      input(type='submit', name='button', value='Search')
+
+    // artist and album info
     h2.artist= artist
     h4.albums= albums

@@ -6,6 +6,7 @@
     "express": "latest",
     "jade": "latest",
     "request": "latest",
-    "lodash": ">=2.4.1"
+    "lodash": ">=2.4.1",
+    "body-parser": "latest"
   }
 }

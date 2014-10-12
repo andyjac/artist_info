@@ -1,5 +1,7 @@
 var express = require('express');
 var request = require('request');
+var lodash = require('lodash');
+var bodyParser = require('body-parser');
 
 // import my lastfm API Key
 var lastfmCreds = require('./lastfm_credentials');
@@ -9,6 +11,13 @@ var app = express();
 
 app.set('views', './views');
 app.set('view engine', 'jade');
+app.use(bodyParser.urlencoded({extended: false}));
+
+// POST user artist search
+app.post('/search', function(req, res) {
+  var artist = req.body.artist;
+  console.log('post recieved: ' + artist);
+});
 
 // GET the home page
 app.get('/', function(req, res) {
