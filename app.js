@@ -22,7 +22,7 @@ app.post('/search', function(req, res) {
 // GET the home page
 app.get('/', function(req, res) {
   var queryURL = buildTopAlbumsQueryURL('flying+lotus');
-  makeRequest(queryURL, renderResults, res);
+  makeRequest(queryURL, _.partial(renderResults, res));
 });
 
 // API url which will return the top albums of a given artist
@@ -36,7 +36,7 @@ function buildTopAlbumsQueryURL(artist) {
 }
 
 // request the API
-function makeRequest(urlToSearch, callBack, res) {
+function makeRequest(urlToSearch, callBack) {
   var parsedResponse
     , artist
     , albums
@@ -49,12 +49,12 @@ function makeRequest(urlToSearch, callBack, res) {
       albums = parsedResponse.topalbums.album;
       topAlbums = _.map(albums, 'name').join(', ');
     }
-    callBack(artist, topAlbums, res);
+    callBack(artist, topAlbums);
   });
 }
 
 // render the retrieved info from the API in the browser
-function renderResults(artist, topAlbums, res) {
+function renderResults(res, artist, topAlbums) {
   res.render('index', { title: 'Top Albums', artist : 'Top albums for ' + artist + ':', albums : topAlbums});
 }
 
