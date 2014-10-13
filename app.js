@@ -24,16 +24,13 @@ app.get('/', function(req, res) {
   makeRequest(searchOnLastfm, renderResults, res);
 });
 
-// QUERY is hard-coded for the time being. Eventually will be retrieved from user input
-;
-
 // API url which will return the top albums of a given artist
-function buildURL(artist) {
+function buildTopAlbumsQueryURL(artist) {
   var lastfmURL = 'http://ws.audioscrobbler.com/2.0/?' +
     'method=artist.gettopalbums&' +
     'artist=' + artist + '&' +
     'limit=10&' +
-    'api_key=' + lastfmCreds + '&' +
+    'api_key=' + LASTFM_CREDS + '&' +
     'format=json';
 }
 
