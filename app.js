@@ -15,8 +15,9 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 // POST user artist search
 app.post('/search', function(req, res) {
-  var artist = req.body.artist;
-  console.log('post recieved: ' + artist);
+  var artist = req.body.artist.split(' ').join('+');
+  var queryURL = buildTopAlbumsQueryURL(artist);
+  makeRequest(queryURL, _.partial(renderResults, res));
 });
 
 // GET the home page
