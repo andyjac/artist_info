@@ -1,10 +1,10 @@
 var express = require('express');
 var request = require('request');
-var lodash = require('lodash');
+var _ = require('lodash');
 var bodyParser = require('body-parser');
 
 // import my lastfm API Key
-var lastfmCreds = require('./lastfm_credentials');
+var LASTFM_CREDS = require('./lastfm_credentials');
 
 // instantiate the express app
 var app = express();
@@ -21,12 +21,13 @@ app.post('/search', function(req, res) {
 
 // GET the home page
 app.get('/', function(req, res) {
-  makeRequest(searchOnLastfm, renderResults, res);
+  var queryURL = buildTopAlbumsQueryURL('flying+lotus');
+  makeRequest(queryURL, renderResults, res);
 });
 
 // API url which will return the top albums of a given artist
 function buildTopAlbumsQueryURL(artist) {
-  var lastfmURL = 'http://ws.audioscrobbler.com/2.0/?' +
+  return 'http://ws.audioscrobbler.com/2.0/?' +
     'method=artist.gettopalbums&' +
     'artist=' + artist + '&' +
     'limit=10&' +
@@ -39,20 +40,14 @@ function makeRequest(urlToSearch, callBack, res) {
   var parsedResponse
     , artist
     , albums
-    , album
-    , topAlbums = [];
+    , topAlbums;
 
   request(urlToSearch, function(error, response, body) {
     if(!error && response.statusCode === 200) {
       parsedResponse = JSON.parse(body);
       artist = parsedResponse.topalbums.album[0].artist.name;
       albums = parsedResponse.topalbums.album;
-      for (var p in albums) {
-        album = albums[p].name;
-        topAlbums.push(album);
-
-      }
-      topAlbums = topAlbums.join(', ');
+      topAlbums = _.map(albums, 'name').join(', ');
     }
     callBack(artist, topAlbums, res);
   });
