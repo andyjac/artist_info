@@ -35,27 +35,35 @@ function buildTopAlbumsQueryURL(artist) {
     'format=json';
 }
 
+function responseOK(error, response) {
+  return !error && response.statusCode === 200;
+}
+
+function extractTopAlbumInfo(body) {
+  if (body.message) { return {message: body.message}; }
+  var results = {};
+  results.artist = body.topalbums.album[0].artist.name;
+  results.albums = _.map(body.topalbums.album, 'name').join(', ');
+  return results;
+}
+
 // request the API
 function makeRequest(urlToSearch, callBack) {
   var parsedResponse
-    , artist
-    , albums
-    , topAlbums;
+    , topAlbumInfo = [];
 
   request(urlToSearch, function(error, response, body) {
-    if(!error && response.statusCode === 200) {
-      parsedResponse = JSON.parse(body);
-      artist = parsedResponse.topalbums.album[0].artist.name;
-      albums = parsedResponse.topalbums.album;
-      topAlbums = _.map(albums, 'name').join(', ');
+    parsedResponse = JSON.parse(body);
+    if(responseOK(error, response)) {
+      topAlbumInfo = extractTopAlbumInfo(parsedResponse);
     }
-    callBack(artist, topAlbums);
+    callBack(topAlbumInfo);
   });
 }
 
 // render the retrieved info from the API in the browser
-function renderResults(res, artist, topAlbums) {
-  res.render('results', { title: 'Top Albums', artist : 'Top albums for ' + artist + ':', albums : topAlbums});
+function renderResults(res, topAlbumInfo) {
+  res.render('results', { title: 'Top Albums', artist : 'Top albums for ' + topAlbumInfo.artist + ':', albums : topAlbumInfo.albums, topAlbumInfo: topAlbumInfo});
 }
 
 app.listen(3000);
