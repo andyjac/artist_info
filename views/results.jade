@@ -14,5 +14,8 @@ html
       input(type='submit', name='button', value='Search')
 
     // artist and album info
-    h2.artist= artist
-    h4.albums= albums
+    if topAlbumInfo.message
+      h2.error= topAlbumInfo.message
+    else
+      h2.artist= artist
+      h4.albums= albums
