@@ -22,8 +22,7 @@ app.post('/search', function(req, res) {
 
 // GET the home page
 app.get('/', function(req, res) {
-  var queryURL = buildTopAlbumsQueryURL('flying+lotus');
-  makeRequest(queryURL, _.partial(renderResults, res));
+  res.render('index');
 });
 
 // API url which will return the top albums of a given artist
@@ -56,7 +55,7 @@ function makeRequest(urlToSearch, callBack) {
 
 // render the retrieved info from the API in the browser
 function renderResults(res, artist, topAlbums) {
-  res.render('index', { title: 'Top Albums', artist : 'Top albums for ' + artist + ':', albums : topAlbums});
+  res.render('results', { title: 'Top Albums', artist : 'Top albums for ' + artist + ':', albums : topAlbums});
 }
 
 app.listen(3000);

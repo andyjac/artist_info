@@ -12,3 +12,7 @@ html
     form(name='artistSearch', action='/search', method='post')
       input(type='text' name='artist', placeholder='enter an artist...')
       input(type='submit', name='button', value='Search')
+
+    // artist and album info
+    h2.artist= artist
+    h4.albums= albums
