@@ -25,15 +25,17 @@ app.get('/', function(req, res) {
 });
 
 // QUERY is hard-coded for the time being. Eventually will be retrieved from user input
-var QUERY = 'flying+lotus';
+;
 
 // API url which will return the top albums of a given artist
-var searchOnLastfm = 'http://ws.audioscrobbler.com/2.0/?' +
+function buildURL(artist) {
+  var lastfmURL = 'http://ws.audioscrobbler.com/2.0/?' +
     'method=artist.gettopalbums&' +
-    'artist=' + QUERY + '&' +
+    'artist=' + artist + '&' +
     'limit=10&' +
     'api_key=' + lastfmCreds + '&' +
     'format=json';
+}
 
 // request the API
 function makeRequest(urlToSearch, callBack, res) {
