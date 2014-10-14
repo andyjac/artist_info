@@ -63,7 +63,7 @@ function makeRequest(urlToSearch, callBack) {
 
 // render the retrieved info from the API in the browser
 function renderResults(res, topAlbumInfo) {
-  res.render('results', { title: 'Top Albums', artist : 'Top albums for ' + topAlbumInfo.artist + ':', albums : topAlbumInfo.albums, topAlbumInfo: topAlbumInfo});
+  res.render('results', topAlbumInfo);
 }
 
 app.listen(3000);
