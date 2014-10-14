@@ -11,19 +11,25 @@ var app = express();
 
 app.set('views', './views');
 app.set('view engine', 'jade');
+// set app to use bodyParser to parse a url encoded body response from a request
 app.use(bodyParser.urlencoded({extended: false}));
 
 // POST user artist search
 app.post('/search', function(req, res) {
-  var artist = req.body.artist.split(' ').join('+');
+  var artist = formatArtistInput(req, artist);
   var queryURL = buildTopAlbumsQueryURL(artist);
-  makeRequest(queryURL, _.partial(renderResults, res));
+  makeTopAlbumsRequestToLasfmAPI(queryURL, _.partial(renderResults, res));
 });
 
 // GET the home page
 app.get('/', function(req, res) {
   res.render('index');
 });
+
+// format artist input and replace ' ' with '+'
+function formatArtistInput(req, artist) {
+  return req.body.artist.split(' ').join('+');
+}
 
 // API url which will return the top albums of a given artist
 function buildTopAlbumsQueryURL(artist) {
@@ -47,8 +53,8 @@ function extractTopAlbumInfo(body) {
   return results;
 }
 
-// request the API
-function makeRequest(urlToSearch, callBack) {
+// request the top 10 albums of an artist on the lastfm API
+function makeTopAlbumsRequestToLasfmAPI(urlToSearch, callBack) {
   var parsedResponse
     , topAlbumInfo = [];
 
