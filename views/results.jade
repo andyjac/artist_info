@@ -1,21 +1,8 @@
-doctype html
-html
-  head
-    title= title
-  body
-    block content
-    // welcome message
-    h1 Hi there!
-    p Go ahead and search for your favorite artist below:
+include index.jade
 
-    // artist search form
-    form(name='artistSearch', action='/search', method='post')
-      input(type='text' name='artist', placeholder='enter an artist...')
-      input(type='submit', name='button', value='Search')
-
-    // artist and album info
-    if topAlbumInfo.message
-      h2.error= topAlbumInfo.message
-    else
-      h2.artist= artist
-      h4.albums= albums
+// artist and album info
+if topAlbumInfo.message
+  h2.error= topAlbumInfo.message
+else
+  h2.artist= artist
+  h4.albums= albums
