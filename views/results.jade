@@ -1,8 +1,9 @@
 include index.jade
 
-// artist and album info
-if topAlbumInfo.message
-  h2.error= topAlbumInfo.message
+// display an error if no artist could be found
+if message
+  h2.error= message
+// if no error display the artists top albums
 else
-  h2.artist= artist
+  h2.artist= 'Top albums for ' + artist + ':'
   h4.albums= albums
