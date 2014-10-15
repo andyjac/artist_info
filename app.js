@@ -28,7 +28,7 @@ app.get('/', function(req, res) {
 
 // format artist input and replace ' ' with '+'
 function formatArtistInput(req, artist) {
-  return req.body.artist.split(' ').join('+');
+  return req.body.artist.replace(/\s+/g, '+');
 }
 
 // API url which will return the top albums of a given artist
