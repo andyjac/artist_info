@@ -4,11 +4,8 @@ html
     title= title
   body
     block content
-    // welcome message
-    h1 Hi there!
+    h1 Welcome!
     p Go ahead and search for your favorite artist below:
-
-    // artist search form
     form(name='artistSearch', action='/search', method='post')
       input(type='text' name='artist', placeholder='enter an artist...')
       input(type='submit', name='button', value='Search')
