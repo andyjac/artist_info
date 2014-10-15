@@ -48,7 +48,7 @@ function responseOK(error, response) {
 
 // get the albums names out of the album objects
 function extractAlbumNames(body) {
-  return _.map(body.topalbums.album, 'name').join(', ');
+  return _.map(body.topalbums.album, 'name');
 }
 
 function extractTopAlbumInfo(body) {
