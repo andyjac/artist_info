@@ -30,6 +30,7 @@ function buildTopAlbumsQueryURL(artist) {
     'method=artist.gettopalbums&' +
     'artist=' + artist + '&' +
     'limit=10&' +
+    'autocorrect=1&' +
     'api_key=' + LASTFM_CREDS + '&' +
     'format=json';
 }
