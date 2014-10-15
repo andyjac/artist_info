@@ -14,11 +14,11 @@ app.set('view engine', 'jade');
 // set app to use bodyParser to parse a url encoded body response from a request
 app.use(bodyParser.urlencoded({extended: false}));
 
-// POST user artist search
+// POST artist search input
 app.post('/search', function(req, res) {
   var artist = formatArtistInput(req, artist);
   var queryURL = buildTopAlbumsQueryURL(artist);
-  makeTopAlbumsRequestToLasfmAPI(queryURL, _.partial(renderResults, res));
+  requestLastfmTopAlbums(queryURL, _.partial(renderResults, res));
 });
 
 // GET the home page
@@ -41,6 +41,7 @@ function buildTopAlbumsQueryURL(artist) {
     'format=json';
 }
 
+// ensure OK response
 function responseOK(error, response) {
   return !error && response.statusCode === 200;
 }
@@ -54,22 +55,31 @@ function extractTopAlbumInfo(body) {
 }
 
 // request the top 10 albums of an artist on the lastfm API
-function makeTopAlbumsRequestToLasfmAPI(urlToSearch, callBack) {
+function requestLastfmTopAlbums(urlToSearch, callBack) {
   var parsedResponse
-    , topAlbumInfo = [];
+    , topAlbumInfo;
 
   request(urlToSearch, function(error, response, body) {
     parsedResponse = JSON.parse(body);
     if(responseOK(error, response)) {
       topAlbumInfo = extractTopAlbumInfo(parsedResponse);
     }
+    else {
+      topAlbumInfo = {errorCode: response.statusCode};
+    }
     callBack(topAlbumInfo);
   });
 }
 
-// render the retrieved info from the API in the browser
+// if there is an error render the error page
+// if no error render top albums in the results page
 function renderResults(res, topAlbumInfo) {
-  res.render('results', topAlbumInfo);
+  if(topAlbumInfo.errorCode) {
+    res.render('error', topAlbumInfo);
+  }
+  else {
+    res.render('results', topAlbumInfo);
+  }
 }
 
 app.listen(3000);
