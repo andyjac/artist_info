@@ -46,12 +46,17 @@ function responseOK(error, response) {
   return !error && response.statusCode === 200;
 }
 
+// get the albums names out of the album objects
+function extractAlbumNames(body) {
+  return _.map(body.topalbums.album, 'name').join(', ');
+}
+
 function extractTopAlbumInfo(body) {
   if (body.message) { return {message: body.message}; }
-  var results = {};
-  results.artist = body.topalbums.album[0].artist.name;
-  results.albums = _.map(body.topalbums.album, 'name').join(', ');
-  return results;
+  return {
+    artist: body.topalbums.album[0].artist.name,
+    albums: extractAlbumNames(body)
+  };
 }
 
 // request the top 10 albums of an artist on the lastfm API
