@@ -22,7 +22,7 @@ app.get('/', function(req, res) {
 });
 
 function formatArtistInput(req, artist) {
-  return req.body.artist.replace(/\s+/g, '+');
+  return encodeURIComponent(req.body.artist).replace(/\s+/g, '+');
 }
 
 function buildTopAlbumsQueryUrl(artist) {
