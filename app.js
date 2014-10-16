@@ -21,8 +21,8 @@ app.get('/', function(req, res) {
   res.render('index');
 });
 
-function formatArtistInput(req, artist) {
-  return encodeURIComponent(req.body.artist).replace(/\s+/g, '+');
+function formatArtistInput(req) {
+  return encodeURIComponent (req.body.artist).replace(/\s+/g, '+');
 }
 
 function buildTopAlbumsQueryUrl(artist) {
@@ -36,7 +36,7 @@ function buildTopAlbumsQueryUrl(artist) {
   };
 
   function addParam(accumulator, value, key) {
-    return accumulator + '&' + key + '=' + value;
+    return [accumulator, '&', key, '=', value].join('');
   }
 
   var baseUrl = 'http://ws.audioscrobbler.com/2.0/?';
