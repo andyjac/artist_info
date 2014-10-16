@@ -8,13 +8,13 @@ var app = express();
 
 app.set('views', './views');
 app.set('view engine', 'jade');
-// set app to use bodyParser to parse a url encoded body response from a request
+// set app to use the bodyParser module to parse a url encoded body response from a request
 app.use(bodyParser.urlencoded({extended: false}));
 
 app.post('/search', function(req, res) {
   var artist = formatArtistInput(req, artist);
-  var queryURL = buildTopAlbumsQueryURL(artist);
-  requestLastfmTopAlbums(queryURL, _.partial(renderResults, res));
+  var queryUrl = buildTopAlbumsQueryUrl(artist);
+  requestLastfmTopAlbums(queryUrl, _.partial(renderResults, res));
 });
 
 app.get('/', function(req, res) {
@@ -25,14 +25,23 @@ function formatArtistInput(req, artist) {
   return req.body.artist.replace(/\s+/g, '+');
 }
 
-function buildTopAlbumsQueryURL(artist) {
-  return 'http://ws.audioscrobbler.com/2.0/?' +
-    'method=artist.gettopalbums&' +
-    'artist=' + artist + '&' +
-    'limit=10&' +
-    'autocorrect=1&' +
-    'api_key=' + LASTFM_CREDS + '&' +
-    'format=json';
+function buildTopAlbumsQueryUrl(artist) {
+  var queryParams = {
+    method: 'artist.gettopalbums',
+    artist: artist,
+    limit: '10',
+    autocorrect: '1',
+    format: 'json',
+    api_key: LASTFM_CREDS
+  };
+
+  function addParam(accumulator, value, key) {
+    return accumulator + '&' + key + '=' + value;
+  }
+
+  var baseUrl = 'http://ws.audioscrobbler.com/2.0/?';
+
+  return _.reduce(queryParams, addParam, baseUrl);
 }
 
 function responseOK(error, response) {
@@ -52,25 +61,27 @@ function extractTopAlbumInfo(body) {
   };
 }
 
-function requestLastfmTopAlbums(urlToSearch, callBack) {
+function requestLastfmTopAlbums(UrlToSearch, callBack) {
   var parsedResponse
-    , topAlbumInfo;
+    , topAlbumInfo
+    , errorResponse;
 
-  request(urlToSearch, function(error, response, body) {
+  request(UrlToSearch, function(error, response, body) {
     parsedResponse = JSON.parse(body);
     if(responseOK(error, response)) {
       topAlbumInfo = extractTopAlbumInfo(parsedResponse);
+      callBack(topAlbumInfo);
     }
     else {
-      topAlbumInfo = {errorCode: response.statusCode};
+      errorResponse = {code: response.statusCode};
+      callBack(errorResponse);
     }
-    callBack(topAlbumInfo);
   });
 }
 
-function renderResults(res, topAlbumInfo) {
-  if(topAlbumInfo.errorCode) {
-    res.render('error', topAlbumInfo);
+function renderResults(res, topAlbumInfo, errorResponse) {
+  if(errorResponse) {
+    res.render('error', errorResponse);
   }
   else {
     res.render('results', topAlbumInfo);
