@@ -1,6 +1,7 @@
 var express = require('express');
 var _ = require('lodash');
 var bodyParser = require('body-parser');
+var formatArtistInput = require('./format_artist_input');
 var buildTopAlbumsQueryUrl = require('./build_url');
 var requestLastfmTopAlbums = require('./make_request');
 
@@ -20,10 +21,6 @@ app.post('/search', function(req, res) {
 app.get('/', function(req, res) {
   res.render('index');
 });
-
-function formatArtistInput(req) {
-  return encodeURIComponent(req.body.artist).replace(/\s+/g, '+');
-}
 
 function renderResults(res, topAlbumInfo, errorResponse) {
   if(errorResponse) {
