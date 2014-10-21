@@ -1,4 +1,5 @@
 var express = require('express');
+var _ = require('lodash');
 var bodyParser = require('body-parser');
 var buildTopAlbumsQueryUrl = require('./build_url');
 var requestLastfmTopAlbums = require('./make_request');
