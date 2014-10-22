@@ -24,11 +24,19 @@ function responseOK(error, response) {
 }
 
 function extractTopAlbumInfo(body) {
-  if (body.message) { return {message: body.message}; }
-  return {
-    artist: body.topalbums.album[0].artist.name,
-    albums: extractAlbumNames(body)
-  };
+  console.log(body);
+  if (body.message) {
+    return {message: body.message};
+  }
+  else if (!body.topalbums.album) {
+    return {message: 'The artist you supplied could not be found'};
+  }
+  else {
+    return {
+      artist: body.topalbums.album[0].artist.name,
+      albums: extractAlbumNames(body)
+    };
+  }
 }
 
 // get the albums names out of the album objects
