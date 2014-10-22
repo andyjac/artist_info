@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 var formatArtistInput = require('./format_artist_input');
 var buildTopAlbumsQueryUrl = require('./build_url');
 var requestLastfmTopAlbums = require('./make_request');
+var postSearchHandler = require('./post_search_handler');
 
 var app = express();
 
@@ -15,20 +16,11 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.post('/search', function(req, res) {
   var artist = formatArtistInput(req, artist);
   var queryUrl = buildTopAlbumsQueryUrl(artist);
-  requestLastfmTopAlbums(queryUrl, _.partial(renderResults, res));
+  requestLastfmTopAlbums(queryUrl, _.partial(postSearchHandler, res));
 });
 
 app.get('/', function(req, res) {
   res.render('index');
 });
-
-function renderResults(res, topAlbumInfo, errorResponse) {
-  if(errorResponse) {
-    res.render('error', errorResponse);
-  }
-  else {
-    res.render('results', topAlbumInfo);
-  }
-}
 
 app.listen(3000);
