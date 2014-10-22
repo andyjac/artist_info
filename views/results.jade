@@ -3,6 +3,6 @@ if message
   h2.error= message
 else
   h2.artist= 'Top albums for ' + artist + ':'
-  ol
+  ol.albums
     each album in albums
       li= album

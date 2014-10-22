@@ -1,10 +1,7 @@
 var express = require('express');
-var _ = require('lodash');
 var bodyParser = require('body-parser');
-var formatArtistInput = require('./format_artist_input');
-var buildTopAlbumsQueryUrl = require('./build_url');
-var requestLastfmTopAlbums = require('./make_request');
 var postSearchHandler = require('./post_search_handler');
+var getRootHandler = require('./get_root_handler');
 
 var app = express();
 
@@ -13,14 +10,7 @@ app.set('view engine', 'jade');
 // set app to use the bodyParser module to parse a url encoded body response from a request
 app.use(bodyParser.urlencoded({extended: false}));
 
-app.post('/search', function(req, res) {
-  var artist = formatArtistInput(req, artist);
-  var queryUrl = buildTopAlbumsQueryUrl(artist);
-  requestLastfmTopAlbums(queryUrl, _.partial(postSearchHandler, res));
-});
-
-app.get('/', function(req, res) {
-  res.render('index');
-});
+app.post('/search', postSearchHandler);
+app.get('/', getRootHandler);
 
 app.listen(3000);
