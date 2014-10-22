@@ -24,7 +24,6 @@ function responseOK(error, response) {
 }
 
 function extractTopAlbumInfo(body) {
-  console.log(body);
   if (body.message) {
     return {message: body.message};
   }
