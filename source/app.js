@@ -10,7 +10,7 @@ app.set('view engine', 'jade');
 // set app to use the bodyParser module to parse a url encoded body response from a request
 app.use(bodyParser.urlencoded({extended: false}));
 
-app.post('/search', postSearchHandler);
+app.get('/search', postSearchHandler);
 app.get('/', getRootHandler);
 
 app.listen(3000);
