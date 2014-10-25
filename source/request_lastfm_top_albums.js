@@ -1,13 +1,14 @@
 var request = require('request');
 var _ = require('lodash');
 
-module.exports = function requestLastfmTopAlbums(UrlToSearch, callBack) {
+module.exports = function requestLastfmTopAlbums(urlToSearch, callBack) {
   var parsedResponse
     , topAlbumInfo
     , errorResponse;
 
-  request(UrlToSearch, function(error, response, body) {
+  request(urlToSearch, function(error, response, body) {
     parsedResponse = JSON.parse(body);
+
     if(responseOK(error, response)) {
       topAlbumInfo = extractTopAlbumInfo(parsedResponse);
       callBack(topAlbumInfo);

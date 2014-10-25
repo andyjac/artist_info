@@ -1,8 +1,9 @@
-var LASTFM_CREDS = require('./lastfm_credentials');
+var LASTFM_CREDS = require('../lastfm_credentials');
+var BASE_URL = 'http://ws.audioscrobbler.com/2.0/?';
 var _ = require('lodash');
 
-module.exports = function buildTopAlbumsQueryUrl(artist) {
-  var queryParams = {
+function queryParams(artist) {
+  return {
     method: 'artist.gettopalbums',
     artist: artist,
     limit: '10',
@@ -10,12 +11,12 @@ module.exports = function buildTopAlbumsQueryUrl(artist) {
     format: 'json',
     api_key: LASTFM_CREDS
   };
+}
 
-  function addParam(accumulator, value, key) {
-    return [accumulator, '&', key, '=', value].join('');
-  }
+function addParam(accumulator, value, key) {
+  return [accumulator, '&', key, '=', value].join('');
+}
 
-  var baseUrl = 'http://ws.audioscrobbler.com/2.0/?';
-
-  return _.reduce(queryParams, addParam, baseUrl);
+module.exports = function buildTopAlbumsQueryUrl(artist) {
+  return _.reduce(queryParams(artist), addParam, BASE_URL);
 };
