@@ -14,7 +14,7 @@ module.exports = function requestLastfmTopAlbums(UrlToSearch, callBack) {
     }
     else {
       errorResponse = {code: response.statusCode};
-      callBack(errorResponse);
+      callBack(null, errorResponse);
     }
   });
 };
