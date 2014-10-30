@@ -12,14 +12,13 @@ function makeAjaxRequest() {
       dataType: 'json',
       success: function(json) {
         console.log(json);
+        var topAlbumsHTML = compiledJade(json);
+        $('div.results').append(topAlbumsHTML);
       },
       error: function(xhr, status, errorThrown) {
         console.log('there was a problem!');
         console.log('status: ' + status);
         console.log('error thrown: ' + errorThrown);
-      },
-      complete: function(xhr, status) {
-        console.log('the request was completed');
       }
     });
   });
