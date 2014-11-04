@@ -1,18 +1,22 @@
 $(document).ready(function() {
   makeAjaxRequest();
 });
-
+var topAlbumsHTML;
 function makeAjaxRequest() {
   $('body').mouseup(function() {
     var artist = window.getSelection().toString();
+    if (topAlbumsHTML != null) {
+      topAlbumsHTML.remove();
+      delete topAlbumsHTML;
+    }
+    if (artist === '') return;
     $.ajax({
       url: '/search',
       type: 'GET',
       data: {artist: artist},
       dataType: 'json',
       success: function(json) {
-        console.log(json);
-        var topAlbumsHTML = compiledJade(json);
+        topAlbumsHTML = $(compiledJade(json));
         $('div.results').append(topAlbumsHTML);
       },
       error: function(xhr, status, errorThrown) {
