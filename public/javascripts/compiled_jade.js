@@ -2,7 +2,13 @@ function compiledJade(locals) {
 var buf = [];
 var jade_mixins = {};
 var jade_interp;
-;var locals_for_with = (locals || {});(function (artist, albums) {
+;var locals_for_with = (locals || {});(function (message, artist, albums) {
+if ( message)
+{
+buf.push("<h2 class=\"error\">" + (jade.escape(null == (jade_interp = message) ? "" : jade_interp)) + "</h2>");
+}
+else
+{
 buf.push("<h2 class=\"artist\">" + (jade.escape(null == (jade_interp = 'Top albums for ' + artist + ':') ? "" : jade_interp)) + "</h2><h2 class=\"albums\"><ol class=\"albumList\">");
 // iterate albums
 ;(function(){
@@ -26,5 +32,6 @@ buf.push("<li>" + (jade.escape(null == (jade_interp = album) ? "" : jade_interp)
   }
 }).call(this);
 
-buf.push("</ol></h2>");}.call(this,"artist" in locals_for_with?locals_for_with.artist:typeof artist!=="undefined"?artist:undefined,"albums" in locals_for_with?locals_for_with.albums:typeof albums!=="undefined"?albums:undefined));;return buf.join("");
+buf.push("</ol></h2>");
+}}.call(this,"message" in locals_for_with?locals_for_with.message:typeof message!=="undefined"?message:undefined,"artist" in locals_for_with?locals_for_with.artist:typeof artist!=="undefined"?artist:undefined,"albums" in locals_for_with?locals_for_with.albums:typeof albums!=="undefined"?albums:undefined));;return buf.join("");
 }
