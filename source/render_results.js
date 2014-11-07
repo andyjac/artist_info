@@ -1,8 +1,12 @@
 module.exports = function renderResults(res, topAlbumInfo, errorResponse) {
   if(errorResponse) {
-    res.render('error', errorResponse);
+    res.header('Content-type', 'application/json');
+    res.header('Charset', 'utf8');
+    res.json(errorResponse);
   }
   else {
-    res.render('results', topAlbumInfo);
+    res.header('Content-type', 'application/json');
+    res.header('Charset', 'utf8');
+    res.json(topAlbumInfo);
   }
 };

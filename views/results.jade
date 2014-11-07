@@ -1,8 +1,0 @@
-include index.jade
-if message
-  h2.error= message
-else
-  h2.artist= 'Top albums for ' + artist + ':'
-  ol.albums
-    each album in albums
-      li= album

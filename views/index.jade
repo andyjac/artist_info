@@ -1,13 +1,12 @@
 doctype html
 html
   head
-    title= title
-    //script(type='text/javascript' src='/javascripts/jquery-1.11.1.js')
-    //script(type='text/javascript' src='/javascripts/client_side.js' async)
+    title= 'Top Albums'
+    script(type='text/javascript' src='/javascripts/jquery-1.11.1.js')
+    script(type='text/javascript' src='/javascripts/jade.js')
+    script(type='text/javascript' src='/javascripts/runtime.js')
+    script(type='text/javascript' src='/javascripts/compiled_jade.js')
+    script(type='text/javascript' src='/javascripts/client_side.js' async)
   body
-    block content
-    h1 Welcome!
-    p Go ahead and search for your favorite artist below:
-    form(name='artistSearch', action='/search', method='post')
-      input(type='text' name='artist', placeholder='enter an artist...')
-      input(type='submit', name='button', value='Search')
+    p Fleet Foxes
+    div.results
