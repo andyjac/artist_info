@@ -1,0 +1,23 @@
+body {
+  background-image: url('/images/doge.jpeg');
+}
+
+.testArtist {
+  padding-top: 20%;
+  text-align: center;
+}
+/* uid to ensure name does collide with page css */
+.E8D9D785-6A04-49B5-9B3C-978BEAC8C2CC {
+  padding: 5px;
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  text-align: left;
+  border: solid 1px black;
+  z-index: 2147483647;
+  background-color: rgba(55, 54, 64, 0.9);
+  color: white;
+  -moz-box-shadow: 5px -5px 25px 2px #34383D;
+  -webkit-box-shadow: 5px -5px 25px 2px #34383D;
+  box-shadow: 5px -5px 25px 2px #34383D;
+}
