@@ -1,9 +1,8 @@
 $(document).ready(function() {
-  $('body').mouseup(getHighlightedText);
+  $('html').mouseup(getHighlightedText);
 });
 
-var topAlbumsHTML
-    , el;
+var topAlbumsHTML;
 
 function getHighlightedText() {
   var artist = window.getSelection().toString();
@@ -32,6 +31,6 @@ function getTopAlbums(artist) {
 
 function handleTopAlbums(json) {
   topAlbumsHTML = $(template(json));
-  el = window.getSelection().anchorNode.parentNode;
-  $(el).append(topAlbumsHTML);
+  topAlbumsHTML.css('display', 'none');
+  $(topAlbumsHTML).appendTo('html').slideDown(100);
 }
