@@ -9,6 +9,7 @@
     "lodash": ">=2.4.1",
     "body-parser": "latest",
     "grunt": "latest",
-    "grunt-contrib-jade": "latest"
+    "grunt-contrib-jade": "latest",
+    "grunt-contrib-watch": "latest"
   }
 }
