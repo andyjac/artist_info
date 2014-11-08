@@ -2,7 +2,8 @@ $(document).ready(function() {
   $('body').mouseup(getHighlightedText);
 });
 
-var topAlbumsHTML;
+var topAlbumsHTML
+    , el;
 
 function getHighlightedText() {
   var artist = window.getSelection().toString();
@@ -30,6 +31,7 @@ function getTopAlbums(artist) {
 }
 
 function handleTopAlbums(json) {
-  topAlbumsHTML = $(compiledJade(json));
-  $('div.results').append(topAlbumsHTML);
+  topAlbumsHTML = $(template(json));
+  el = window.getSelection().anchorNode.parentNode;
+  $(el).append(topAlbumsHTML);
 }
