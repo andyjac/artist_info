@@ -7,7 +7,13 @@ module.exports = function requestLastfmTopAlbums(urlToSearch, callBack) {
     , errorResponse;
 
   request(urlToSearch, function(error, response, body) {
-    parsedResponse = JSON.parse(body);
+    try {
+      parsedResponse = JSON.parse(body);
+    }
+    catch (e) {
+      console.error(e);
+      return;
+    }
 
     if(responseOK(error, response)) {
       topAlbumInfo = extractTopAlbumInfo(parsedResponse);
