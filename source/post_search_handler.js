@@ -1,6 +1,6 @@
 var _ = require('lodash');
 var formatArtistInput = require('./format_artist_input');
-var buildTopAlbumsQueryUrl = require('./build_url');
+var buildTopAlbumsQueryUrl = require('./build_top_albums_query_url');
 var requestLastfmTopAlbums = require('./request_lastfm_top_albums');
 var renderResults = require('./render_results');
 
