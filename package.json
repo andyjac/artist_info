@@ -2,12 +2,14 @@
   "name": "lastfmTopAlbums",
   "version": "0.0.1",
   "private": true,
-  "devDependencies": {
+  "dependencies": {
     "express": "latest",
     "jade": "latest",
     "request": "latest",
     "lodash": ">=2.4.1",
-    "body-parser": "latest",
+    "body-parser": "latest"
+  },
+  "devDependencies": {
     "grunt": "latest",
     "grunt-contrib-jade": "latest",
     "grunt-contrib-watch": "latest"
