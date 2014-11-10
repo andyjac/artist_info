@@ -1,11 +1,11 @@
 $(document).ready(function() {
   $('html').mouseup(getHighlightedText);
 });
-
 var topAlbumsHTML;
 
 function getHighlightedText() {
   var artist = window.getSelection().toString();
+
   if (topAlbumsHTML != null) {
     topAlbumsHTML.remove();
     delete topAlbumsHTML;
@@ -32,5 +32,5 @@ function getTopAlbums(artist) {
 function handleTopAlbums(json) {
   topAlbumsHTML = $(template(json));
   topAlbumsHTML.css('display', 'none');
-  $(topAlbumsHTML).appendTo('html').slideDown(100);
+  $(topAlbumsHTML).appendTo('html').fadeIn(100);
 }
