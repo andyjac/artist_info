@@ -2,30 +2,26 @@ body {
   background-image: url('/images/doge.jpeg');
 }
 
-.testArtist {
-  padding-top: 20%;
-  text-align: center;
-}
 /* uid to ensure name does collide with page css */
 .E8D9D785-6A04-49B5-9B3C-978BEAC8C2CC {
+  font-family: verdana;
   padding: 5px;
   position: fixed;
-  top: 10px;
-  right: 10px;
+  top: 15px;
+  right: 15px;
   border: solid 5px rgb(93, 139, 125);
   z-index: 2147483647;
-  background-color: rgba(27, 84, 66, 0.93);
-  color: rgb(209, 212, 211);
-  -moz-box-shadow: 5px -5px 25px 2px rgb(86, 103, 100);
-  -webkit-box-shadow: 5px -5px 25px 2px rgb(86, 103, 100);
-  box-shadow: 5px -5px 25px 2px rgb(86, 103, 100);
+  background-color: rgba(255, 255, 255, 0.93);
+  color: rgb(74, 74, 74);
 }
 
 .E8D9D785-6A04-49B5-9B3C-978BEAC8C2CC .artist {
+  font-size: 17px;
   text-align: center;
 }
 
 .E8D9D785-6A04-49B5-9B3C-978BEAC8C2CC .albumList {
+  font-size: 15px;
   text-align: left;
   padding-right: 15px;
 }
