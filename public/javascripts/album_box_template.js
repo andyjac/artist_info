@@ -6,15 +6,15 @@ var jade_interp;
 buf.push("<div class=\"E8D9D785-6A04-49B5-9B3C-978BEAC8C2CC\">");
 if ( message)
 {
-buf.push("<h3 class=\"error\">" + (jade.escape(null == (jade_interp = message) ? "" : jade_interp)) + "</h3>");
+buf.push("<h4 class=\"error\">" + (jade.escape(null == (jade_interp = message) ? "" : jade_interp)) + "</h4>");
 }
 else if ( album)
 {
-buf.push("<p class=\"artist\">" + (jade.escape(null == (jade_interp = 'Top album for ' + artist + ':') ? "" : jade_interp)) + "</p><ol class=\"albumList\"><li>" + (jade.escape(null == (jade_interp = album) ? "" : jade_interp)) + "</li></ol>");
+buf.push("<h4 class=\"artist\">" + (jade.escape(null == (jade_interp = 'Top album for ' + artist + ':') ? "" : jade_interp)) + "</h4><ol class=\"albumList\"><li>" + (jade.escape(null == (jade_interp = album) ? "" : jade_interp)) + "</li></ol>");
 }
 else
 {
-buf.push("<p class=\"artist\">" + (jade.escape(null == (jade_interp = 'Top albums for ' + artist + ':') ? "" : jade_interp)) + "</p><ol class=\"albumList\">");
+buf.push("<h4 class=\"artist\">" + (jade.escape(null == (jade_interp = 'Top albums for ' + artist + ':') ? "" : jade_interp)) + "</h4><ol class=\"albumList\">");
 // iterate albums
 ;(function(){
   var $$obj = albums;

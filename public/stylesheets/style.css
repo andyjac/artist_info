@@ -5,7 +5,7 @@ body {
 /* uid to ensure name does collide with page css */
 .E8D9D785-6A04-49B5-9B3C-978BEAC8C2CC {
   font-family: verdana;
-  padding: 5px;
+  padding: 0 10px;
   position: fixed;
   top: 15px;
   right: 15px;
@@ -16,12 +16,10 @@ body {
 }
 
 .E8D9D785-6A04-49B5-9B3C-978BEAC8C2CC .artist {
-  font-size: 17px;
   text-align: center;
 }
 
 .E8D9D785-6A04-49B5-9B3C-978BEAC8C2CC .albumList {
   font-size: 15px;
   text-align: left;
-  padding-right: 15px;
 }

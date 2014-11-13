@@ -1,12 +1,12 @@
 .E8D9D785-6A04-49B5-9B3C-978BEAC8C2CC
   if message
-    h3.error= message
+    h4.error= message
   else if album
-    p.artist= 'Top album for ' + artist + ':'
+    h4.artist= 'Top album for ' + artist + ':'
     ol.albumList
       li= album
   else
-    p.artist= 'Top albums for ' + artist + ':'
+    h4.artist= 'Top albums for ' + artist + ':'
     ol.albumList
       each album in albums
         li= album
