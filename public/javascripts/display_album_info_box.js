@@ -30,7 +30,7 @@ function getTopAlbums(artist) {
 }
 
 function handleTopAlbums(json) {
-  topAlbumsHTML = $(template(json));
+  topAlbumsHTML = $(albumBoxTemplate(json));
   topAlbumsHTML.css('display', 'none');
   $(topAlbumsHTML).appendTo('html').fadeIn(200);
 }
