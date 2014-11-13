@@ -31,11 +31,18 @@ function responseOK(error, response) {
 }
 
 function extractTopAlbumInfo(body) {
+  console.log(body);
   if (body.message) {
     return {message: body.message};
   }
   else if (!body.topalbums.album) {
     return {message: 'The artist you supplied could not be found'};
+  }
+  else if (!(Array.isArray(body.topalbums.album))) {
+    return {
+      artist: body.topalbums.album.artist.name,
+      album: body.topalbums.album.name
+    };
   }
   else {
     return {
