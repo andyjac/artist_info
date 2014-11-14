@@ -1,8 +1,8 @@
-body {
+/*body {
   background-image: url('/images/doge.jpeg');
-}
+}*/
 
-/* uid to ensure name does collide with page css */
+/* uid for album box to ensure name does collide with page css */
 .E8D9D785-6A04-49B5-9B3C-978BEAC8C2CC {
   font-family: verdana;
   padding: 0 10px;
@@ -22,4 +22,16 @@ body {
 .E8D9D785-6A04-49B5-9B3C-978BEAC8C2CC .albumList {
   font-size: 15px;
   text-align: left;
+}
+
+/* uid for loading spinner to ensure name does not collide with page css */
+.RDD9A2B8-731C-4B04-AE9C-E17BBFCE794A {
+  background-image: url('/images/loading_spinner.gif');
+  background-repeat: no-repeat;
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  z-index: 2147483647;
+  width: 32px;
+  height: 32px;
 }
