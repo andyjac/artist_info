@@ -2,7 +2,8 @@ $(document).ready(function() {
   $('html').mouseup(getHighlightedText);
 });
 var topAlbumsHTML
-    , loadingSpinner = '<div class="RDD9A2B8-731C-4B04-AE9C-E17BBFCE794A"></div';
+    , loadingSpinnerHTML = '<div class="RDD9A2B8-731C-4B04-AE9C-E17BBFCE794A"></div'
+    , loadingSpinnerClassSelector = '.RDD9A2B8-731C-4B04-AE9C-E17BBFCE794A';
 
 function getHighlightedText() {
   var artist = window.getSelection().toString();
@@ -12,7 +13,7 @@ function getHighlightedText() {
     delete topAlbumsHTML;
   }
   if (artist === '') return;
-  $('html').append(loadingSpinner);
+  $('html').append(loadingSpinnerHTML);
   getTopAlbums(artist);
 }
 
@@ -33,7 +34,8 @@ function getTopAlbums(artist) {
 
 function handleTopAlbums(json) {
   topAlbumsHTML = $(albumBoxTemplate(json));
-  topAlbumsHTML.css('display', 'none');
-  $('.RDD9A2B8-731C-4B04-AE9C-E17BBFCE794A').remove();
+  // $('.RDD9A2B8-731C-4B04-AE9C-E17BBFCE794A').remove();
+  $(loadingSpinnerClassSelector).remove();
+  delete loadingSpinnerHTML;
   topAlbumsHTML.appendTo('html').fadeIn(200);
 }
