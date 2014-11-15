@@ -15,7 +15,7 @@ module.exports = function requestLastfmTopAlbums(urlToSearch, callBack) {
       return;
     }
 
-    if(responseOK(error, response)) {
+    if (responseOK(error, response)) {
       topAlbumInfo = extractTopAlbumInfo(parsedResponse);
       callBack(topAlbumInfo);
     }
