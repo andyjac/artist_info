@@ -4,7 +4,8 @@ $(document).ready(function() {
 var topAlbumsHTML
     , uuid = 'E8D9D785-6A04-49B5-9B3C-978BEAC8C2CC'
     , loadingSpinnerHTML = ['<div class="', uuid, ' preloader"/>'].join('')
-    , loadingSpinnerClassSelector = ['.', uuid, '.preloader'].join('');
+    , loadingSpinnerClassSelector = ['.', uuid, '.preloader'].join('')
+    , makingRequest;
 
 function getHighlightedText() {
   var artist = window.getSelection().toString();
@@ -15,10 +16,11 @@ function getHighlightedText() {
   }
   if (artist === '') return;
   $('html').append(loadingSpinnerHTML);
-  getTopAlbums(artist);
+  if (!makingRequest) getTopAlbums(artist);
 }
 
 function getTopAlbums(artist) {
+  makingRequest = true;
   $.ajax({
     url: '/search',
     type: 'GET',
@@ -34,6 +36,7 @@ function getTopAlbums(artist) {
 }
 
 function handleTopAlbums(json) {
+  makingRequest = false;
   topAlbumsHTML = $(albumBoxTemplate(json));
   $(loadingSpinnerClassSelector).remove();
   topAlbumsHTML.appendTo('html').fadeIn(200);
