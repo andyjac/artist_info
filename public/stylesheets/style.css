@@ -1,6 +1,6 @@
-/*body {
+body {
   background-image: url('/images/doge.jpeg');
-}*/
+}
 
 /* uid for album box to ensure name does collide with page css */
 .E8D9D785-6A04-49B5-9B3C-978BEAC8C2CC {
@@ -33,6 +33,6 @@
   top: 15px;
   right: 15px;
   z-index: 2147483647;
-  width: 32px;
-  height: 32px;
+  width: 64px;
+  height: 64px;
 }
