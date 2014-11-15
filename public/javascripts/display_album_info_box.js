@@ -2,8 +2,9 @@ $(document).ready(function() {
   $('html').mouseup(getHighlightedText);
 });
 var topAlbumsHTML
-    , loadingSpinnerHTML = '<div class="RDD9A2B8-731C-4B04-AE9C-E17BBFCE794A"></div'
-    , loadingSpinnerClassSelector = '.RDD9A2B8-731C-4B04-AE9C-E17BBFCE794A';
+    , uuid = 'E8D9D785-6A04-49B5-9B3C-978BEAC8C2CC'
+    , loadingSpinnerHTML = ['<div class="', uuid, ' preloader"/>'].join('')
+    , loadingSpinnerClassSelector = ['.', uuid, '.preloader'].join('');
 
 function getHighlightedText() {
   var artist = window.getSelection().toString();
@@ -35,6 +36,5 @@ function getTopAlbums(artist) {
 function handleTopAlbums(json) {
   topAlbumsHTML = $(albumBoxTemplate(json));
   $(loadingSpinnerClassSelector).remove();
-  delete loadingSpinnerHTML;
   topAlbumsHTML.appendTo('html').fadeIn(200);
 }

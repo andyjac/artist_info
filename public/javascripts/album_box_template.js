@@ -3,7 +3,7 @@ var buf = [];
 var jade_mixins = {};
 var jade_interp;
 ;var locals_for_with = (locals || {});(function (message, album, artist, albums) {
-buf.push("<div class=\"E8D9D785-6A04-49B5-9B3C-978BEAC8C2CC\">");
+buf.push("<div class=\"E8D9D785-6A04-49B5-9B3C-978BEAC8C2CC results\">");
 if ( message)
 {
 buf.push("<h4 class=\"error\">" + (jade.escape(null == (jade_interp = message) ? "" : jade_interp)) + "</h4>");

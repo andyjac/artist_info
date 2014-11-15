@@ -3,7 +3,7 @@ body {
 }
 
 /* uid for album box to ensure name does collide with page css */
-.E8D9D785-6A04-49B5-9B3C-978BEAC8C2CC {
+.E8D9D785-6A04-49B5-9B3C-978BEAC8C2CC.results {
   display: none;
   font-family: verdana;
   padding: 0 10px;
@@ -16,17 +16,17 @@ body {
   color: rgb(74, 74, 74);
 }
 
-.E8D9D785-6A04-49B5-9B3C-978BEAC8C2CC .artist {
+.E8D9D785-6A04-49B5-9B3C-978BEAC8C2CC.results .artist {
   text-align: center;
 }
 
-.E8D9D785-6A04-49B5-9B3C-978BEAC8C2CC .albumList {
+.E8D9D785-6A04-49B5-9B3C-978BEAC8C2CC.results .albumList {
   font-size: 15px;
   text-align: left;
 }
 
 /* uid for loading spinner to ensure name does not collide with page css */
-.RDD9A2B8-731C-4B04-AE9C-E17BBFCE794A {
+.E8D9D785-6A04-49B5-9B3C-978BEAC8C2CC.preloader {
   background-image: url('/images/loading_spinner.gif');
   background-repeat: no-repeat;
   position: fixed;
