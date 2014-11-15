@@ -34,7 +34,6 @@ function getTopAlbums(artist) {
 
 function handleTopAlbums(json) {
   topAlbumsHTML = $(albumBoxTemplate(json));
-  // $('.RDD9A2B8-731C-4B04-AE9C-E17BBFCE794A').remove();
   $(loadingSpinnerClassSelector).remove();
   delete loadingSpinnerHTML;
   topAlbumsHTML.appendTo('html').fadeIn(200);
