@@ -37,13 +37,10 @@ function responseOK(error, response) {
 }
 
 function extractTopAlbumInfo(body) {
-  if (body.message) {
-    return {message: body.message};
-  }
-  else if (!body.topalbums.album) {
+  if (body.message || !body.topalbums.album) {
     return {message: 'The artist you supplied could not be found'};
   }
-  else if (!_.isArray(body.topalbums.album)) {
+  if (!_.isArray(body.topalbums.album)) {
     body.topalbums.album = [].concat(body.topalbums.album);
   }
   return {
@@ -52,7 +49,7 @@ function extractTopAlbumInfo(body) {
   };
 }
 
-// get the albums names out of the album objects
+// get album names out of the album objects
 function extractAlbumNames(body) {
   return _.map(body.topalbums.album, 'name');
 }
