@@ -8,5 +8,10 @@
     "request": "latest",
     "lodash": ">=2.4.1",
     "body-parser": "latest"
+  },
+  "devDependencies": {
+    "grunt": "latest",
+    "grunt-contrib-jade": "latest",
+    "grunt-contrib-watch": "latest"
   }
 }

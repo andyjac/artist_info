@@ -1,0 +1,8 @@
+.E8D9D785-6A04-49B5-9B3C-978BEAC8C2CC.results
+  if message
+    h4.error= message
+  else
+    h4.artist= 'Top albums for ' + artist + ':'
+    ol.albumList
+      each album in albums
+        li= album

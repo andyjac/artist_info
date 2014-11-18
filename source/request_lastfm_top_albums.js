@@ -7,14 +7,26 @@ module.exports = function requestLastfmTopAlbums(urlToSearch, callBack) {
     , errorResponse;
 
   request(urlToSearch, function(error, response, body) {
-    parsedResponse = JSON.parse(body);
+    try {
+      parsedResponse = JSON.parse(body);
+    }
+    catch (e) {
+      console.error(e);
+      errorResponse = {
+        message: [e, ' Oops! Looks like something went wrong!'].join('')
+      };
+      callBack(errorResponse);
+      return;
+    }
 
-    if(responseOK(error, response)) {
+    if (responseOK(error, response)) {
       topAlbumInfo = extractTopAlbumInfo(parsedResponse);
       callBack(topAlbumInfo);
     }
     else {
-      errorResponse = {code: response.statusCode};
+      errorResponse = {
+        message: [response.statusCode, ' Oops! Looks like something went wrong!'].join('')
+      };
       callBack(null, errorResponse);
     }
   });
@@ -25,21 +37,19 @@ function responseOK(error, response) {
 }
 
 function extractTopAlbumInfo(body) {
-  if (body.message) {
-    return {message: body.message};
-  }
-  else if (!body.topalbums.album) {
+  if (body.message || !body.topalbums.album) {
     return {message: 'The artist you supplied could not be found'};
   }
-  else {
-    return {
-      artist: body.topalbums.album[0].artist.name,
-      albums: extractAlbumNames(body)
-    };
+  if (!_.isArray(body.topalbums.album)) {
+    body.topalbums.album = [].concat(body.topalbums.album);
   }
+  return {
+    artist: body.topalbums.album[0].artist.name,
+    albums: extractAlbumNames(body)
+  };
 }
 
-// get the albums names out of the album objects
+// get album names out of the album objects
 function extractAlbumNames(body) {
   return _.map(body.topalbums.album, 'name');
 }
