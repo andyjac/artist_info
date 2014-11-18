@@ -27,7 +27,7 @@ module.exports = function requestLastfmTopAlbums(urlToSearch, callBack) {
       errorResponse = {
         message: [response.statusCode, ' Oops! Looks like something went wrong!'].join('')
       };
-      callBack(errorResponse);
+      callBack(null, errorResponse);
     }
   });
 };
