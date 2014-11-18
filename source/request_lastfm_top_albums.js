@@ -12,6 +12,10 @@ module.exports = function requestLastfmTopAlbums(urlToSearch, callBack) {
     }
     catch (e) {
       console.error(e);
+      errorResponse = {
+        message: [e, ' Oops! Looks like something went wrong!'].join('')
+      };
+      callBack(errorResponse);
       return;
     }
 
@@ -20,7 +24,9 @@ module.exports = function requestLastfmTopAlbums(urlToSearch, callBack) {
       callBack(topAlbumInfo);
     }
     else {
-      errorResponse = {code: response.statusCode};
+      errorResponse = {
+        message: [response.statusCode, ' Oops! Looks like something went wrong!'].join('')
+      };
       callBack(errorResponse);
     }
   });
