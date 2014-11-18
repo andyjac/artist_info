@@ -37,18 +37,13 @@ function extractTopAlbumInfo(body) {
   else if (!body.topalbums.album) {
     return {message: 'The artist you supplied could not be found'};
   }
-  else if (!(Array.isArray(body.topalbums.album))) {
-    return {
-      artist: body.topalbums.album.artist.name,
-      album: body.topalbums.album.name
-    };
+  else if (!_.isArray(body.topalbums.album)) {
+    body.topalbums.album = [].concat(body.topalbums.album);
   }
-  else {
-    return {
-      artist: body.topalbums.album[0].artist.name,
-      albums: extractAlbumNames(body)
-    };
-  }
+  return {
+    artist: body.topalbums.album[0].artist.name,
+    albums: extractAlbumNames(body)
+  };
 }
 
 // get the albums names out of the album objects
