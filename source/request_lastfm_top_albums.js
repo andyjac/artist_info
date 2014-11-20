@@ -11,19 +11,21 @@ module.exports = function requestLastfmTopAlbums(urlToSearch, callBack) {
       parsedResponse = JSON.parse(body);
     }
     catch (e) {
-      console.error(e);
+      console.error(['Date[', Date.now(), '] Error[JSON.parse(body):', e, ']'].join(''));
       errorResponse = {
-        message: [e, ' Oops! Looks like something went wrong!'].join('')
+        message: 'Oops! Looks like something went wrong!'
       };
       callBack(errorResponse);
       return;
     }
 
     if (responseOK(error, response)) {
+      console.log(['Date[', Date.now(), '] Success[Good Request]'].join(''));
       topAlbumInfo = extractTopAlbumInfo(parsedResponse);
       callBack(topAlbumInfo);
     }
     else {
+      console.error(['Date[', Date.now(), '] Error[Bad Request: ', response.statusCode, ']'].join(''));
       errorResponse = {
         message: [response.statusCode, ' Oops! Looks like something went wrong!'].join('')
       };
@@ -38,9 +40,11 @@ function responseOK(error, response) {
 
 function extractTopAlbumInfo(body) {
   if (body.message || !body.topalbums.album) {
+    console.error(['Date[', Date.now(), '] Error[Artist not found]'].join(''));
     return {message: 'The artist you supplied could not be found'};
   }
   if (!_.isArray(body.topalbums.album)) {
+    console.info(['Date[', Date.now(), '] Alert[Not Array]'].join(''));
     body.topalbums.album = [].concat(body.topalbums.album);
   }
   return {
