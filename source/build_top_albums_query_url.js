@@ -3,6 +3,7 @@ var BASE_URL = 'http://ws.audioscrobbler.com/2.0/?';
 var _ = require('lodash');
 
 function queryParams(artist) {
+  console.log(['Date [', Date.now(), '] Alert[Artist Searched: ', artist, ']'].join(''));
   return {
     method: 'artist.gettopalbums',
     artist: artist,
