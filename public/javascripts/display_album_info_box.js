@@ -9,7 +9,6 @@ var topAlbumsHTML
 
 function getHighlightedText() {
   var artist = window.getSelection().toString();
-
   if (topAlbumsHTML != null) {
     topAlbumsHTML.remove();
     delete topAlbumsHTML;
@@ -28,9 +27,9 @@ function getTopAlbums(artist) {
     dataType: 'json',
     success: handleTopAlbums,
     error: function(xhr, status, errorThrown) {
-      console.log('there was a problem!');
-      console.log('status: ' + status);
-      console.log('error thrown: ' + errorThrown);
+      console.error(['Date', Date.now(), '] Error[Bad Request]'].join(''));
+      console.error(['Status: ', status].join(''));
+      console.error(['Error Thrown: ', errorThrown].join(''));
     }
   });
 }
