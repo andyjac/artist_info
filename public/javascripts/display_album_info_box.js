@@ -9,6 +9,7 @@ var topAlbumsHTML
 
 function getHighlightedText() {
   var artist = window.getSelection().toString();
+  console.info(['Date[', Date.now(), '] Alert[Highlighted Selection: ', artist, ']'].join(''));
 
   if (topAlbumsHTML != null) {
     topAlbumsHTML.remove();
@@ -21,6 +22,7 @@ function getHighlightedText() {
 
 function getTopAlbums(artist) {
   makingRequest = true;
+  console.info(['Date[', Date.now(), '] Alert[Ajax Request Sent]'].join(''));
   $.ajax({
     url: '/search',
     type: 'GET',
@@ -28,15 +30,16 @@ function getTopAlbums(artist) {
     dataType: 'json',
     success: handleTopAlbums,
     error: function(xhr, status, errorThrown) {
-      console.log('there was a problem!');
-      console.log('status: ' + status);
-      console.log('error thrown: ' + errorThrown);
+      console.error(['Date', Date.now(), '] Error[Bad Request]'].join(''));
+      console.error(['Status: ', status].join(''));
+      console.error(['Error Thrown: ', errorThrown].join(''));
     }
   });
 }
 
 function handleTopAlbums(json) {
   makingRequest = false;
+  console.log(['Date[', Date.now(), '] Success[Good Request]'].join(''));
   topAlbumsHTML = $(albumBoxTemplate(json));
   $(loadingSpinnerClassSelector).remove();
   topAlbumsHTML.appendTo('html').fadeIn(200);

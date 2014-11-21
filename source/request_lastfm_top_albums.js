@@ -40,12 +40,20 @@ function responseOK(error, response) {
 
 function extractTopAlbumInfo(body) {
   if (body.message || !body.topalbums.album) {
-    console.error(['Date[', Date.now(), '] Error[Artist not found]'].join(''));
+    console.error(['Date[', Date.now(), '] Error[Artist Not Found]'].join(''));
     return {message: 'The artist you supplied could not be found'};
   }
   if (!_.isArray(body.topalbums.album)) {
+    // console.log(body);
+    // console.log(body.topalbums);
     console.info(['Date[', Date.now(), '] Alert[Not Array]'].join(''));
+    console.info('==> topalbums Object Before Array Wrap:');
+    console.info(body.topalbums);
+
     body.topalbums.album = [].concat(body.topalbums.album);
+
+    console.info('==> topalbums Object After Array Wrap:');
+    console.info(body.topalbums);
   }
   return {
     artist: body.topalbums.album[0].artist.name,
