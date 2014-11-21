@@ -45,9 +45,6 @@ function extractTopAlbumInfo(body) {
   }
   if (!_.isArray(body.topalbums.album)) {
     body.topalbums.album = [].concat(body.topalbums.album);
-    console.info(['Date[', Date.now(), '] Alert[Not Array]'].join(''));
-    console.info('==> topalbums Object After Array Wrap:');
-    console.info(body.topalbums);
   }
   return {
     artist: body.topalbums.album[0].artist.name,
