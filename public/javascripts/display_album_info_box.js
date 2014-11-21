@@ -9,8 +9,6 @@ var topAlbumsHTML
 
 function getHighlightedText() {
   var artist = window.getSelection().toString();
-  console.info(['Date[', Date.now(), '] Alert[Highlighted Selection: ', artist, ']'].join(''));
-
   if (topAlbumsHTML != null) {
     topAlbumsHTML.remove();
     delete topAlbumsHTML;
@@ -22,7 +20,6 @@ function getHighlightedText() {
 
 function getTopAlbums(artist) {
   makingRequest = true;
-  console.info(['Date[', Date.now(), '] Alert[Ajax Request Sent]'].join(''));
   $.ajax({
     url: '/search',
     type: 'GET',
@@ -39,7 +36,6 @@ function getTopAlbums(artist) {
 
 function handleTopAlbums(json) {
   makingRequest = false;
-  console.log(['Date[', Date.now(), '] Success[Good Request]'].join(''));
   topAlbumsHTML = $(albumBoxTemplate(json));
   $(loadingSpinnerClassSelector).remove();
   topAlbumsHTML.appendTo('html').fadeIn(200);

@@ -44,14 +44,8 @@ function extractTopAlbumInfo(body) {
     return {message: 'The artist you supplied could not be found'};
   }
   if (!_.isArray(body.topalbums.album)) {
-    // console.log(body);
-    // console.log(body.topalbums);
-    console.info(['Date[', Date.now(), '] Alert[Not Array]'].join(''));
-    console.info('==> topalbums Object Before Array Wrap:');
-    console.info(body.topalbums);
-
     body.topalbums.album = [].concat(body.topalbums.album);
-
+    console.info(['Date[', Date.now(), '] Alert[Not Array]'].join(''));
     console.info('==> topalbums Object After Array Wrap:');
     console.info(body.topalbums);
   }
