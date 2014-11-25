@@ -14,4 +14,4 @@ app.use(express.static('public'));
 app.get('/search', getSearchHandler);
 app.get('/', getRootHandler);
 
-app.listen(3000);
+app.listen(process.env.PORT || 3000);
