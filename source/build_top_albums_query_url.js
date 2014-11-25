@@ -1,4 +1,4 @@
-var LASTFM_CREDS = require('../lastfm_credentials');
+var LASTFM_CREDS = process.env.LASTFM_CREDS || require('../lastfm_credentials');
 var BASE_URL = 'http://ws.audioscrobbler.com/2.0/?';
 var _ = require('lodash');
 
