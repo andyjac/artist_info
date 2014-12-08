@@ -11,7 +11,7 @@ app.set('view engine', 'jade');
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static('public'));
 
-app.get('/search', getSearchHandler);
-app.get('/', getRootHandler);
+app.get('artist-info.herokuapp.com/search', getSearchHandler);
+app.get('artist-info.herokuapp.com', getRootHandler);
 
 app.listen(process.env.PORT || 3000);
