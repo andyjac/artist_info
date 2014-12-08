@@ -27,7 +27,7 @@ function getTopAlbums(artist) {
     dataType: 'json',
     success: handleTopAlbums,
     error: function(xhr, status, errorThrown) {
-      console.error(['Date', Date.now(), '] Error[Bad Request]'].join(''));
+      console.error(['Date[', Date.now(), '] Error[Bad Request]'].join(''));
       console.error(['Status: ', status].join(''));
       console.error(['Error Thrown: ', errorThrown].join(''));
     }
