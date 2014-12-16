@@ -1,0 +1,12 @@
+{
+  "name": "artist_info",
+  "title": "artist_info",
+  "id": "jid1-6s3s1CrU0AW7mg",
+  "description": "Displays the top 10 albums for a user highlighted artist.",
+  "author": "Andrew Jacobson",
+  "license": "MPL 2.0",
+  "version": "0.0.1",
+  "permissions": {
+    "cross-domain-content": ["http://artist-info.herokuapp.com/", "http://artist-info.herokuapp.com/search"]
+  }
+}
