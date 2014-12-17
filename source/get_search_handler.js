@@ -5,7 +5,7 @@ var requestLastfmTopAlbums = require('./request_lastfm_top_albums');
 var renderResults = require('./render_results');
 
 module.exports = function postSearchHandler(req, res) {
-  console.info(['Date[', Date.now(), '] Alert[Request From Address: ', req.ip, ']'].join(''));
+  console.info(['\nDate[', Date.now(), '] Alert[Request From Address: ', req.ip, ']'].join(''));
   var artist = formatArtistInput(req);
   var queryUrl = buildTopAlbumsQueryUrl(artist);
 
