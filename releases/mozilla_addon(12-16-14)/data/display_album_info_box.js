@@ -21,7 +21,7 @@ function getHighlightedText() {
 function getTopAlbums(artist) {
   makingRequest = true;
   $.ajax({
-    url: 'http://artist-search.herokuapp.com/search',
+    url: 'http://artist-info.herokuapp.com/search',
     type: 'GET',
     data: {artist: artist},
     dataType: 'json',
