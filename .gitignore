@@ -2,3 +2,5 @@
 log/*.log*
 /npm-debug.log
 /lastfm_credentials.js
+.env
+/**/**/results.js
